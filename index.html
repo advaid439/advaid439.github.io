@@ -1,23 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Advaid’s Dojo</title>
-  <style>
-    body { background:#000; color:#00ff99; font-family:monospace; text-align:center; padding-top:10%; }
-    h1 { text-shadow:0 0 8px #00ff99; }
-    a { color:#00ff99; text-decoration:none; border-bottom:1px solid #00ff99; margin:0 10px; }
-    a:hover { color:#fff; border-color:#fff; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Advaid’s Dojo</title>
+<style>
+  /* matrix background */
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: black;
+  }
+
+  body {
+    color: #00ff99;
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+  }
+
+  header {
+    text-align: center;
+    padding: 60px 20px 20px;
+  }
+
+  h1 {
+    font-size: 2.2em;
+    text-shadow: 0 0 8px #00ff99;
+    animation: flicker 4s infinite;
+  }
+
+  @keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; text-shadow: 0 0 8px #00ff99, 0 0 16px #00ff99; }
+    20%, 24%, 55% { opacity: 0.4; text-shadow: none; }
+  }
+
+  nav a {
+    color: #00ff99;
+    margin: 0 15px;
+    text-decoration: none;
+    border-bottom: 1px solid #00ff99;
+    transition: 0.3s;
+  }
+  nav a:hover {
+    color: #fff;
+    border-color: #fff;
+  }
+
+  section {
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 255, 153, 0.2);
+    animation: sectionGlow 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes sectionGlow {
+    0% { box-shadow: 0 0 5px rgba(0,255,153,0.2); }
+    100% { box-shadow: 0 0 15px rgba(0,255,153,0.5); }
+  }
+
+  h2 {
+    color: #00ffaa;
+    border-bottom: 1px solid #00ffaa;
+    padding-bottom: 5px;
+    text-shadow: 0 0 8px #00ffaa;
+  }
+
+  footer {
+    text-align: center;
+    color: #777;
+    font-size: 0.8em;
+    padding: 40px 0;
+    border-top: 1px solid #222;
+  }
+</style>
 </head>
 <body>
+<canvas id="matrix"></canvas>
+
+<header>
   <h1>Advaid’s Dojo</h1>
   <p>Engineer • Warrior • Strategist</p>
-  <p>
-    <a href="tech/">Tech</a> |
-    <a href="upsc/">UPSC</a> |
-    <a href="martial/">Martial Arts</a>
-  </p>
+  <nav>
+    <a href="#tech">Tech</a>
+    <a href="#upsc">UPSC</a>
+    <a href="#martial">Martial Arts</a>
+  </nav>
+</header>
+
+<section id="tech">
+  <h2>Tech</h2>
+  <p>Automation, AI, DevOps — where logic meets precision.</p>
+  <ul>
+    <li>Grafana and Monitoring Stack</li>
+    <li>Docker, Kubernetes</li>
+    <li>AI, Neural Networks, ML Roadmaps</li>
+    <li>Automation with Bash and Python</li>
+  </ul>
+</section>
+
+<section id="upsc">
+  <h2>UPSC</h2>
+  <p>Strategy, structure, and discipline — the art of mental warfare.</p>
+  <ul>
+    <li>General Studies Notes</li>
+    <li>Ethics and Philosophy</li>
+    <li>Current Affairs Condensed</li>
+    <li>Answer Writing and Revision Methods</li>
+  </ul>
+</section>
+
+<section id="martial">
+  <h2>Martial Arts</h2>
+  <p>Muay Thai. Precision. Power. Presence.</p>
+  <ul>
+    <li>Training Logs</li>
+    <li>Fight Philosophy</li>
+    <li>Physical and Mental Conditioning</li>
+    <li>Stoicism in Combat</li>
+  </ul>
+</section>
+
+<footer>
+  <p>© 2025 Advaid — Built in the Shell</p>
+</footer>
+
+<script>
+  // Matrix rain background
+  const canvas = document.getElementById("matrix");
+  const ctx = canvas.getContext("2d");
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%";
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
+
+  function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#00ff99";
+    ctx.font = fontSize + "px monospace";
+    for (let i = 0; i < drops.length; i++) {
+      const text = chars.charAt(Math.floor(Math.random() * chars.length));
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      drops[i]++;
+    }
+  }
+  setInterval(draw, 33);
+
+  window.addEventListener("resize", () => {
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+  });
+</script>
 </body>
 </html>
-
