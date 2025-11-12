@@ -86,7 +86,9 @@
 </head>
 <body>
 <canvas id="matrix"></canvas>
-
+<audio id="tick" preload="auto">
+  <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=" type="audio/wav">
+</audio>
 <header>
   <h1>Advaid’s Dojo</h1>
   <p>Engineer • Warrior • Strategist</p>
@@ -164,6 +166,15 @@
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
   });
+// soft typing sound
+const tick = document.getElementById("tick");
+tick.volume = 0.15;
+document.querySelectorAll("h2, h1").forEach(el => {
+  el.addEventListener("mouseenter", () => {
+    tick.currentTime = 0;
+    tick.play();
+  });
+});
 </script>
 </body>
 </html>
