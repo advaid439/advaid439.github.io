@@ -1,3 +1,4 @@
+console.log("EFFECTS JS LOADED");
 // Typing animation
 const subtitle = document.getElementById("subtitle");
 const text = subtitle.getAttribute("data-text");
