@@ -1,4 +1,5 @@
 console.log("EFFECTS JS LOADED");
+
 // Typing animation
 const subtitle = document.getElementById("subtitle");
 const text = subtitle.getAttribute("data-text");
@@ -13,36 +14,39 @@ function type() {
 }
 setTimeout(type, 3500);
 
-// Get sound elements
+// Sound elements
 const hum = document.getElementById("hum");
 const tick = document.getElementById("tick");
 const beep = document.getElementById("beep");
 const crackle = document.getElementById("crackle");
 
-// Force hum to start after first click
+// Unlock ALL sound AFTER first click
 window.addEventListener("click", () => {
+
+    // Start hum
     hum.volume = 0.25;
     hum.play().catch(e => console.log("Hum blocked:", e));
-}, { once: true });
 
-// Header hover sound
-document.querySelectorAll("h1, h2").forEach(el => {
-    el.addEventListener("mouseenter", () => {
-        tick.currentTime = 0;
-        tick.play();
-    });
-});
-
-// Link hover sound
-document.querySelectorAll("nav a").forEach(el => {
-    el.addEventListener("mouseenter", () => {
-        beep.currentTime = 0;
-        beep.play();
-    });
-});
-
-// Boot crackle
-setTimeout(() => {
+    // Play crackle once
     crackle.currentTime = 0;
     crackle.play();
-}, 1500);
+
+    // Enable tick on hover
+    document.querySelectorAll("h1, h2").forEach(el => {
+        el.addEventListener("mouseenter", () => {
+            tick.currentTime = 0;
+            tick.play();
+        });
+    });
+
+    // Enable beep on nav hover
+    document.querySelectorAll("nav a").forEach(el => {
+        el.addEventListener("mouseenter", () => {
+            beep.currentTime = 0;
+            beep.play();
+        });
+    });
+
+    console.log("Sound system unlocked.");
+
+}, { once: true });
