@@ -8,6 +8,17 @@ body {
   cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAMAAADz6VQWAAAAD1BMVEUAAAD///8AAAB/f3/19fXf39/5EKe9AAAABnRSTlMAiYnH9e1bHTAAAABFSURBVAjXY2BgZGAAAkYGJiYGBiYmBgAADGAAV/Q93skAAAAASUVORK5CYII='), auto;
 }
 
+/* Matrix background canvas */
+canvas#matrix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* behind everything */
+  pointer-events: none; /* allow clicking through */
+}
+
 /* Boot screen */
 #boot {
   position: fixed;
@@ -67,4 +78,9 @@ section {
 @keyframes glowBreath {
   from { box-shadow: 0 0 8px rgba(0,255,153,0.2); }
   to   { box-shadow: 0 0 16px rgba(0,255,153,0.5); }
+}
+/* Force text above matrix */
+header, section, footer, nav, h1, h2, p, #subtitle, #title {
+  position: relative;
+  z-index: 10;
 }
