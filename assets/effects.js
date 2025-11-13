@@ -15,7 +15,7 @@ function type() {
 setTimeout(type, 3500);
 
 // Sound elements
-const hum = document.getElementById("hum");
+//const hum = document.getElementById("hum");
 const tick = document.getElementById("tick");
 const beep = document.getElementById("beep");
 const crackle = document.getElementById("crackle");
@@ -24,8 +24,8 @@ const crackle = document.getElementById("crackle");
 window.addEventListener("click", () => {
 
     // Start hum
-    hum.volume = 0.25;
-    hum.play().catch(e => console.log("Hum blocked:", e));
+  //  hum.volume = 0.25;
+    // hum.play().catch(e => console.log("Hum blocked:", e));
 
     // Play crackle once
     crackle.currentTime = 0;
